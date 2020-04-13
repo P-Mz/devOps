@@ -27,8 +27,15 @@ jobs:
       run: |
         npm install
         npm run build
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
       env:
-        CI: true
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build
+        BUILD_SCRIPT: npm install && npm run build
+    #  env:
+    #    CI: true
     # 设置阿里云OSS的 id/secret，存储到 github 的 secrets 中
     # - name: setup aliyun oss
     #  uses: manyuanrong/setup-ossutil@master
